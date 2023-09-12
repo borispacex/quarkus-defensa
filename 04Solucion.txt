@@ -1,0 +1,32 @@
+-- buscamos donde esta nuestro archivo daemon.json
+$HOME/.docker/daemon.json
+
+-- configuramos el archivo, para que pueda ser monitoreado
+nano /home/borisv/.docker/daemon.json
+
+{
+    "metrics-addr": "0.0.0.0:9323",
+    "experimental": true
+}
+
+-- ejecutamos los contenedos para prometheus y grafana:
+cd containers/monitoring
+docker-compose up -d
+
+-- Tenemos que parar gitlab porque cadvisor ocupa el puerto 8080
+sudo gitlab-ctl stop
+
+-- Nos dirigimos a la direccion, para el dashboard de prometheus: 192.168.0.9:9090
+http://localhost:9090/
+
+
+-- las metricas estan en la direccion: 192.168.0.9:9323/metrics
+http://localhost:9323/metrics
+
+-- abrimos la interfaz de grafana: 192.168.0.9:3000
+http://localhost:3000/login
+username: admin
+password: password
+
+-- Creamos una conexion (Vamos a Datasource / Prometheus) con la direccion : http://192.168.0.9:9090
+-- Despues creamos dashboard e importamos (docker-quest-prometheus.json)
