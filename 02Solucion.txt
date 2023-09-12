@@ -1,0 +1,12 @@
+-- PRERAMOS para el apigateway
+
+-- Cread la red
+docker network create kong-net
+
+-- Inspeccionamos si esta usando la red que creamos
+docker inspect kong-net
+
+-- ejecutamos los contenedores
+cd containers/apigateway
+docker-compose up -d
+

@@ -1,0 +1,18 @@
+-- Iniciamos Keycloak
+docker run -d -p 8181:8080 -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin --name oidc jboss/keycloak
+
+-- vamos a la direccion: 192.168.0.9:8181/auth
+http://localhost:8181/auth/
+
+-- Vamos a la Administration Console
+username: admin
+password: admin
+
+-- Creamos un realm (Add realm), podemos crear de cero o importar, en nuestro  caso importamos (quarkus-realm.json)
+
+-- Ingresamos a la direccion 192.168.0.9:8088/q/swagger-ui/
+http://localhost:8088/q/swagger-ui/
+
+-- Para la autorizacion para el token ingresamos con algun usuario ejemplo:
+username: alice 
+password: alice

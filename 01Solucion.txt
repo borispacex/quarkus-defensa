@@ -1,0 +1,8 @@
+-- PREPARAMOS jaeger, consul y la bd postgres
+
+-- ejecutamos los contenedores jaeger, consul, postgres
+cd containers/base
+docker-compose up -d
+
+
+
