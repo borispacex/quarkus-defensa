@@ -7,6 +7,13 @@ docker network create kong-net
 docker inspect kong-net
 
 -- ejecutamos los contenedores
-cd containers/apigateway
+cd containers/api-gateway
 docker-compose up -d
 
+username: admin
+password: p@ssw0rd
+
+-- Ejecutar base de datos, kong y konga
+docker start kong-database
+docker start konga
+docker start kong

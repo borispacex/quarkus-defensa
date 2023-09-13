@@ -4,5 +4,9 @@
 cd containers/base
 docker-compose up -d
 
+-- ejecutamos los contenedores, despues de crearlos
+docker start monster-db
+docker start jaeger-co
+docker start consul-co
 
 

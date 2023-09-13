@@ -21,5 +21,6 @@ public class CarConsumer {
         Car car = record.value();
         String data = " Car: {key:"+record.key()+",price:"+car.getPrice()+",model:"+car.getModel()+"}";
         logger.info(data);
- }
+    }
+
 }

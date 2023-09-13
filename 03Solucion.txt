@@ -11,8 +11,11 @@ password: admin
 -- Creamos un realm (Add realm), podemos crear de cero o importar, en nuestro  caso importamos (quarkus-realm.json)
 
 -- Ingresamos a la direccion 192.168.0.9:8088/q/swagger-ui/
-http://localhost:8088/q/swagger-ui/
+http://localhost:8280/q/swagger-ui/
 
 -- Para la autorizacion para el token ingresamos con algun usuario ejemplo:
 username: alice 
 password: alice
+
+frontend-service
+secret

@@ -30,20 +30,15 @@ import jakarta.ws.rs.core.Response;
 
 @Path("/cars")
 public class CarResource {
-
 	@Inject
     SecurityIdentity securityIdentity;
-
-
 	@Inject
 	CarRepository carRepository;
-
 	@Inject
 	ShopRepository shopRepository;
 
-	
-	@Inject
-    CarProducer producer;
+	/// @Inject
+    /// CarProducer producer;
 
 	private final Logger logger = LoggerFactory.getLogger(Car.class);
 
@@ -52,7 +47,7 @@ public class CarResource {
 	@Consumes(MediaType.APPLICATION_JSON)
     @Path("enviar")
     public Response send(Car car) {
-    	producer.sendCarToKafka(car);
+    	/// producer.sendCarToKafka(car);
 		logger.info("¡Car enviado con exito!. "+car);
 		// Return an 202 - Accepted response.
         return Response.accepted().build();
@@ -165,15 +160,11 @@ public class CarResource {
     public User usuario() {
         return new User(securityIdentity);
     }
-
     public static class User {
-
         private final String userName;
-
         User(SecurityIdentity securityIdentity) {
             this.userName = securityIdentity.getPrincipal().getName();
         }
-
         public String getUserName() {
             return userName;
         }

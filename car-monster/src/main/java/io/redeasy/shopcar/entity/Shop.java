@@ -18,13 +18,10 @@ public class Shop {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long id;
-	
 	@Column(length = 16)
 	String state;
-	
 	@Column(length = 128)
 	String address;
-	
 	@OneToMany( mappedBy="shop",fetch = FetchType.LAZY )
 	@JsonManagedReference
 	List<Car> cars;

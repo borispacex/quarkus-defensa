@@ -49,9 +49,7 @@ public class ShopResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timeout(5000)
 	public Response getAll() {
-		//qpausa(3000L);
 		List<Shop> shops = shopRepository.listAll();
 		return Response.ok(shops).build();
 	}

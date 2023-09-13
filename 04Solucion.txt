@@ -28,5 +28,12 @@ http://localhost:3000/login
 username: admin
 password: password
 
--- Creamos una conexion (Vamos a Datasource / Prometheus) con la direccion : http://192.168.0.9:9090
--- Despues creamos dashboard e importamos (docker-quest-prometheus.json)
+-- Despues creamos datasource y dashboard para importar (docker-quest-prometheus.json)
+
+-- Ejecutar prometheus y grafana
+docker start prometheus
+docker start grafana
+docker start node-exporter
+docker start pushgateway
+docker start cadvisor
+

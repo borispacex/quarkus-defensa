@@ -16,16 +16,17 @@ public class Registration {
 	@ConfigProperty(name = "consul.host") String host;
     @ConfigProperty(name = "consul.port") int port;
     // Info: Registra el puerto donde se ejeuta el servicio a registrar
-    @ConfigProperty(name = "quarkus.http.port", defaultValue = "8080") int car1Port;  
+    @ConfigProperty(name = "quarkus.http.port", defaultValue = "8280") int car1Port;
     
     public void init(@Observes StartupEvent ev, Vertx vertx) {
         ConsulClient client = ConsulClient.create(vertx, new ConsulClientOptions().setHost(host)
         		                                                                  .setPort(port));
         client.registerServiceAndAwait(
                 new ServiceOptions().setPort(car1Port)
-                                    .setAddress("192.168.56.1")
+                                    .setAddress("192.168.0.9") // 192.168.0.9
                                     .setName("car-service")
                                     .setId("car-1"));
         
     }
+
 }
