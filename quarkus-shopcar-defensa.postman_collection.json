@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "fa3d09eb-6ca5-4eb9-a379-8d1a820c8c3e",
+		"name": "quarkus-shopcar-defensa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5726533"
+	},
+	"item": [
+		{
+			"name": "kong",
+			"item": [
+				{
+					"name": "Add Service",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"car-service\",\n    \"url\": \"http://192.168.0.9:8280\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/services",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Route",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"route-to-car\",\n    \"service\": {\n        \"name\": \"car-service\"\n    },\n    \"paths\": [\"/api\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/routes",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"key-auth\",\n    \"config\": {\n        \"key_names\": [\"x-api-key\"],\n        \"key_in_header\": true,\n        \"key_in_query\": false,\n        \"key_in_body\": false\n    },\n    \"route\": {\n        \"name\": \"route-to-shop\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/plugins",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add consumer and credentials",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juan\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/consumers",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"consumers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get juan credentials key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.9:8001/consumers/juan/key-auth",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"consumers",
+								"juan",
+								"key-auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get shops with key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "key",
+									"value": "x-api-key",
+									"type": "string"
+								},
+								{
+									"key": "value",
+									"value": "SyXY36713aAhc1UykJd6Xn5nkkz7rcGs",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8000/api/shops",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"shops"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.9:8000/api/cars",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cache Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"proxy-cache\",\n    \"config\": {\n        \"request_method\": [\"GET\"],\n        \"response_code\": [200],\n        \"content_type\": [\"application/json; charset-utf-8\"],\n        \"cache_ttl\": 30,\n        \"strategy\": \"memory\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/routes/route-to-car/plugins",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"routes",
+								"route-to-car",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CORS Plugin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"cors\",\n    \"config\": {\n        \"origins\": [\"*\"],\n        \"methods\": [\"GET\",\"POST\"],\n        \"headers\": [\"Accept\",\"Accept-Version\",\"Content-Length\",\"Content-MDS\",\"Content-Type\",\"Date\",\"X-Auth-Token\"],\n        \"exposed_headers\": [\"X-Auth-Token\"],\n        \"credentials\": true,\n        \"max_age\": 3600\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://192.168.0.9:8001/routes/route-to-car/plugins",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"9"
+							],
+							"port": "8001",
+							"path": [
+								"routes",
+								"route-to-car",
+								"plugins"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "saveCar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"BMW 525\",\r\n    \"bodyType\": \"sedan\",\r\n    \"brand\": \"BMW\",\r\n    \"year\": \"2007\",\r\n    \"price\": 8500.0,\r\n    \"seats\": 5,\r\n    \"doors\": 4,\r\n    \"urlImage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars/1",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarByBrand",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars/brand/BMW",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars",
+						"brand",
+						"BMW"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarSize",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars/size",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars",
+						"size"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarsByShopId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars/shop/1",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars",
+						"shop",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addToShop",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"BMW 525\",\r\n    \"bodyType\": \"sedan\",\r\n    \"brand\": \"BMW\",\r\n    \"year\": \"2007\",\r\n    \"price\": 8500.0,\r\n    \"seats\": 5,\r\n    \"doors\": 4,\r\n    \"urlImage\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{myIP}}:8280/cars/1/shop/1",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8280",
+					"path": [
+						"cars",
+						"1",
+						"shop",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveShop",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"state\": \"La Paz\",\r\n    \"address\": \"Mallasa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{myIP}}:8180/shops",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8180",
+					"path": [
+						"shops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getShops",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8180/shops",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8180",
+					"path": [
+						"shops"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getShopsById",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{myIP}}:8180/shops/1",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8180",
+					"path": [
+						"shops",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCarsByShopId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{myIP}}:8180/shops/1/cars",
+					"protocol": "http",
+					"host": [
+						"{{myIP}}"
+					],
+					"port": "8180",
+					"path": [
+						"shops",
+						"1",
+						"cars"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
