@@ -116,7 +116,7 @@ Abrimos la interfaz de grafana: http://192.168.0.9:3000 con las credenciales par
 
 Despues creamos datasource y dashboard para importar (docker-quest-prometheus.json)
 
-Ejecutar prometheus y grafana
+Comandos para ejecutar contenedores, cuando se inicia el equipo nuevamente.
 ```
 docker start prometheus
 docker start grafana
